@@ -13,6 +13,24 @@ export default function Dashboard() {
   const [graphNodes, setGraphNodes] = useState<string[]>([]);
   const [graphEdges, setGraphEdges] = useState<string[]>([]);
 
+  const handleSubmit = async (formData: FormData) => {
+    const result = await renderGraph(formData);
+    if (result?.message) {
+      setError(result.message);
+      setGraphNodes([]);
+      setGraphEdges([]);
+    } else {
+      setError(null);
+      setGraphNodes(result.nodes as string[]);
+      setGraphEdges(result.edges as string[]);
+    }
+  };
+  const handleReset = () => {
+    setError(null);
+    setGraphNodes([]);
+    setGraphEdges([]);
+  };
+
   return (
     <main className="bg-teal-100 flex-1 flex flex-col">
       {error && <Error message={error} />}
@@ -28,7 +46,11 @@ export default function Dashboard() {
               <h3 className="text-sm mb-4 text-gray-600">
                 Enter your graph notation below:
               </h3>
-              <form className="flex flex-col gap-4">
+              <form
+                className="flex flex-col gap-4"
+                action={handleSubmit}
+                onReset={handleReset}
+              >
                 <TextArea id="graph-notation" placeholder="e.g. A->B" />
                 <div className="flex gap-4">
                   <Button type="submit" theme="primary">
