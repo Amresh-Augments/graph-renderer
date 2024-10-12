@@ -6,7 +6,7 @@ export default function Matrix({
   graphEdges: string[];
 }>) {
   return (
-    <div className="border-2 border-gray-300 bg-slate-50 rounded p-4 border-b-2 mt-4 flex-1 flex flex-row items-center justify-center">
+    <div className="border-2 border-gray-300 rounded p-4 border-b-2 flex-1 flex flex-row items-center justify-center">
       {graphNodes.length > 0 ? (
         <table className="text-center">
           <thead>
@@ -58,7 +58,7 @@ export default function Matrix({
           </tbody>
         </table>
       ) : (
-        <div className="bg-gray-200 animate-pulse h-full w-full flex flex-row items-center justify-center">
+        <div className="bg-gray-200 animate-pulse h-full w-full flex flex-row items-center justify-center text-center p-2">
           <p className="text-gray-500">
             The adjacency matrix will be displayed here.
           </p>
