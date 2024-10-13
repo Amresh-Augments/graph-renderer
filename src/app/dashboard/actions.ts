@@ -32,11 +32,11 @@ export async function renderGraph(formData: FormData): Promise<SuccessResponse |
 
   notation?.forEach((l, idx) => {
     l = l.replace('\r', '');
+    const regex = /^[A-Z]\s*->\s*[A-Z]$/;
     const space = l.includes(' ');
     const arrow = l.includes('->');
-    const length = l.length === 4;
-
-    if (space || !arrow || !length) {
+    const regexTest = regex.test(l);
+    if (space || !arrow || !regexTest) {
       return (error = `Hey, there was an error parsing line ${idx + 1} of your graph notation!`);
     }
 
